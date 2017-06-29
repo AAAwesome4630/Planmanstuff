@@ -1,0 +1,11 @@
+
+<%= form_for @sc_relationship do |f| %>
+
+    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
+Password<br></br>
+<%= text_field_tag(:password) %><br></br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

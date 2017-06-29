@@ -1,0 +1,19 @@
+<%= form_for @test, url: tests_path(@test) do |f| %>
+
+    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_field :date, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :topic %><br />
+    <%= f.text_field :topic, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

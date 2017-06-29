@@ -1,0 +1,2 @@
+module TpagesHelper
+end

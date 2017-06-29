@@ -1,0 +1,24 @@
+<%= form_for @assignment, url: assignments_path(@assignment) do |f| %>
+
+    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
+
+  <div class="field">
+    <%= f.label :due_date %><br />
+    <%= f.date_field :due_date, autofocus: true %>
+  </div>
+  
+ <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :eta %><br />
+    <%= f.number_field :eta, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

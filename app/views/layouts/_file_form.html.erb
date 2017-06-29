@@ -1,0 +1,18 @@
+<%= form_for @t_file, :html =>  {:multipart => true}, url: t_files_path(@t_file) do |f| %>
+
+    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.file_field :file%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

@@ -1,0 +1,19 @@
+<%= form_for @announcement, url: announcements_path(@announcements) do |f| %>
+
+    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
+
+  <div class="field">
+    <%= f.label :header %><br />
+    <%= f.text_field :header%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

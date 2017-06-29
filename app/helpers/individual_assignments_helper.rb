@@ -1,0 +1,2 @@
+module IndividualAssignmentsHelper
+end

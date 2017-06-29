@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
+  resources :admin_announcements
+  resources :individual_quizzes
+  resources :quizzes
+  resources :individual_tests
+  resources :individual_assignments
+  devise_for :administrators
   devise_for :teachers
   devise_for :students
   devise_for :users
+  resources :classrooms 
+  resources :sc_relationships
+  resources :assignments
+  resources :tests
+  resources :announcements
+  resources :t_files 
+
   root 'pages#index'
 
   get 'home' =>'pages#home'
@@ -9,6 +22,24 @@ Rails.application.routes.draw do
   get 'find' => 'pages#find'
 
   get 'profile' => 'pages#profile'
+  
+  get 'newclassroom' =>'forms#newclassroom'
+  
+  get 'classroom/:id' =>'pages#classroom'
+
+  get 'classrooms/:id/join/:token' => 'pages#classlink'
+  post 'auth_student' => 'authentication#authenticate_student'
+  post 'auth_teacher' => 'authentication#authenticate_teacher'
+  namespace :api do
+    root 'pages#index'
+    get 'student' => 'spages#index'
+    get 'teacher' => 'tpages#index'
+    resources :classrooms
+    resources :sc_relationships
+    resources :assignments
+    resources :tests
+  end
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

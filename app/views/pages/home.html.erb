@@ -1,31 +1,33 @@
-<div class="row">
-    <div class="col-xs-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>stats</p>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>Trends</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>ASSIGNMENTS</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p>about</p>
-            </div>
-        </div>
-    </div>
+<%if student_signed_in?%>
+<h3>Your Assignments</h3>
+<% for @a in @sassignments do%>
+<p><%=@a.name%>  <%=@a.due_date%></p>
+<%end%>
+<h3>Your Upcoming Tests</h3>
+<% for @t in @stests do%>
+<p><%=@t.topic%> <%=@t.date%></p>
+<%end%>
+<div id="articles">
+<%= calendar do |date|%>
+<%= date.day%>
+<% for @a in @sassignments do%>
+    <% if @a.due_date == date%>
+        <li><%=@a.name%></li>
+    <%end%>
+<%end%>
+<% for @t in @stests do%>
+    <% if @t.date == date%>
+        <li><%=@t.name%></li>
+    <%end%>
+<%end%>
+<%end%>
 </div>
+<%if teacher_signed_in?%>
+
+
+<%end%>
+
+<%end%>
 
 
 

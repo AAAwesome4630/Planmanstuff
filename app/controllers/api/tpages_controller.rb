@@ -1,0 +1,2 @@
+class TpagesController < ApplicationController
+end

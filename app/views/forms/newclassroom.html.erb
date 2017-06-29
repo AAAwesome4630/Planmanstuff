@@ -1,0 +1,8 @@
+
+<% if !(teacher_signed_in?)%>
+<h2> YOU ARE NOT SUPPOSED TO BE HERE</h2>
+<a href="/">GO BACK HOME</a>
+<%else%>
+<h2>Create a Classroom</h2>
+<%= render '/layouts/classroom_form'%>
+<%end%>
