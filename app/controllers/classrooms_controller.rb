@@ -2,7 +2,7 @@
 
 class ClassroomsController < ApplicationController
   
-
+before_filter :authenticate_teacher!, :except => [:show, :index]
   
   def index
     
@@ -23,7 +23,7 @@ class ClassroomsController < ApplicationController
       if(teacher_signed_in?)
         if(current_teacher.id == @teacher_id)
           @tstatus = true
-          @link = "https://my-planner-app-cloned18-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest
+          @link = "https://my-planner-app-cloned-20-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest.delete('.')
         else
           @tstatus = false
         end
@@ -37,13 +37,10 @@ class ClassroomsController < ApplicationController
       if(student_signed_in?)
 
         for relationship in @crelationships do
-                       
+            @status = false           
             if(relationship.student_id == current_student.id)
               @status = true
               @scs_relationship = relationship
-            else
-              @status = false
-
             end
         
         
@@ -79,7 +76,7 @@ class ClassroomsController < ApplicationController
     @classroom.teacher_id = current_teacher.id
     respond_to do |format|
       if @classroom.save
-        format.html { redirect_to "", notice: 'classroom was successfully created.' }
+        format.html { redirect_to @classroom, notice: 'classroom was successfully created.' }
       else
         format.html { redirect_to "", notice: 'error not created' }
       end

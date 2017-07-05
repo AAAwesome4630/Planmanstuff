@@ -11,6 +11,31 @@
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+  
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+
+  
+   <div class="field">
+    <%= f.label :title %><br />
+    <%= f.select :title, ['Mr.', 'Mrs.', 'Ms.', 'Dr.'] %>
+  </div>
+  
+  <%= f.label :school_name%><br />
+  <%= f.text_field :school_name, list: "schools_autocomplete" %>
+  <datalist id="schools_autocomplete">
+    <%= School.all.each do |school| %>
+      <option value="<%= school.name %>"></option>
+    <% end %>
+  </datalist>
+
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />

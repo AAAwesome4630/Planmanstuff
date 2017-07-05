@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
-  
+  before_filter :authenticate_student!, :only => [:classlink]
 
   def index
     term = params[:q]
     @classrooms = Classroom.search(term)
-    @classroom = Classroom.find_by_id(5)
+    #@classroom = Classroom.find_by_id(5)
   end
 
   def home
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
       
       require 'json'
       
-      @schedule = JSON.parse student_schedule("normal")
+      #@schedule = JSON.parse student_schedule("normal")
       
       @assignments = Assignment.all
       @tests = Test.all
@@ -123,8 +123,7 @@ class PagesController < ApplicationController
   end
   
   def classlink
-
-    if (student_signed_in?)
+    
        @classroom = Classroom.find_by_id(params[:id])
        for student in @classroom.students do
          if student == current_student.id
@@ -134,12 +133,12 @@ class PagesController < ApplicationController
          if joined
            redirect_to @classroom, :notice => "You are already part of this classroom"
          else
-           if(@classroom.password_digest == params[:token])
+           if(@classroom.password_digest.delete('.') == params[:token])
             @sc_relationship = ScRelationship.new(classroom_id: @classroom.id, student_id: current_student.id)
             respond_to do |format|
         if @sc_relationship.save
           @classroom.students.push(current_student.id)
-          current_student.classrooms.push(@classroom_id)
+          current_student.classrooms.push(@classroom.id)
           @classroom.save
           current_student.save
           format.html { redirect_to @classroom, notice: 'Relationship was successfully created.' }
@@ -148,20 +147,15 @@ class PagesController < ApplicationController
         end
       end
            else
-             redirect_to @classroom, notice{ "Wrong Password"}
+             redirect_to @classroom, notice: "Wrong Password"
            end
          end
-     
-      
-       
-      
-    else
-      redirect_to new_student_session
-      
-    end
   
 
   end
+  
+
+  
   
   def student_schedule(weekend)
     @json_string_start = "{\"assignments\":"
@@ -200,4 +194,13 @@ class PagesController < ApplicationController
     
   end
   
+  def authenticate_student!
+    if (teacher_signed_in?)
+      sign_out current_teacher
+      super
+    else
+      super
+    end
+  end
+
 end

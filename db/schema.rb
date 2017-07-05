@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628212527) do
+ActiveRecord::Schema.define(version: 20170630052117) do
 
   create_table "admin_announcements", force: :cascade do |t|
     t.integer  "admin_id"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20170628212527) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "school_id",              default: 0,  null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
   end
 
   add_index "administrators", ["email"], name: "index_administrators_on_email", unique: true
@@ -67,13 +70,10 @@ ActiveRecord::Schema.define(version: 20170628212527) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.text     "students",         default: "--- []\n"
-    t.string   "password"
     t.string   "password_digest"
   end
 
   add_index "classrooms", ["name", "teacher_id"], name: "index_classrooms_on_name_and_teacher_id"
-  add_index "classrooms", ["numberOfStudents", "teacher_id"], name: "index_classrooms_on_numberOfStudents_and_teacher_id"
-  add_index "classrooms", ["subject", "teacher_id"], name: "index_classrooms_on_subject_and_teacher_id"
 
   create_table "individual_assignments", force: :cascade do |t|
     t.integer  "assignment_id"
@@ -131,24 +131,28 @@ ActiveRecord::Schema.define(version: 20170628212527) do
   end
 
   add_index "sc_relationships", ["classroom_id", "student_id"], name: "index_sc_relationships_on_classroom_id_and_student_id", unique: true
-  add_index "sc_relationships", ["classroom_id"], name: "index_sc_relationships_on_classroom_id"
-  add_index "sc_relationships", ["student_id"], name: "index_sc_relationships_on_student_id"
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.string   "type"
+    t.string   "city"
+    t.string   "zipcode"
     t.string   "state"
     t.string   "country"
     t.string   "mascot"
     t.string   "website"
-    t.integer  "numberOfTeachers"
+    t.integer  "numberOfTeachers", default: 0
+    t.integer  "NCES_id"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.text     "administrators",   default: "--- []\n"
     t.text     "teachers",         default: "--- []\n"
     t.text     "students",         default: "--- []\n"
+    t.string   "password_digest"
   end
+
+  add_index "schools", ["name", "address"], name: "index_schools_on_name_and_address", unique: true
 
   create_table "students", force: :cascade do |t|
     t.string   "email",                  default: "",         null: false
@@ -165,6 +169,8 @@ ActiveRecord::Schema.define(version: 20170628212527) do
     t.datetime "updated_at",                                  null: false
     t.text     "classrooms",             default: "--- []\n"
     t.integer  "school_id",              default: 0
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "students", ["email"], name: "index_students_on_email", unique: true
@@ -202,6 +208,9 @@ ActiveRecord::Schema.define(version: 20170628212527) do
     t.datetime "updated_at",                                  null: false
     t.integer  "school_id",              default: 0
     t.text     "classrooms",             default: "--- []\n"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
@@ -230,7 +239,6 @@ ActiveRecord::Schema.define(version: 20170628212527) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

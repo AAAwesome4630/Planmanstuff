@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :tests
   resources :announcements
   resources :t_files 
+  resources :schools
 
   root 'pages#index'
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   get 'classroom/:id' =>'pages#classroom'
 
   get 'classrooms/:id/join/:token' => 'pages#classlink'
+  #get 'classlink/:token' => 'pages#classlink'
   post 'auth_student' => 'authentication#authenticate_student'
   post 'auth_teacher' => 'authentication#authenticate_teacher'
   namespace :api do

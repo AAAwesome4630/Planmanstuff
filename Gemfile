@@ -19,10 +19,14 @@ gem 'coffee-rails', '~> 4.1.0'
 #devise for user authentication
 gem 'devise'
 
+gem 'jquery-ui-rails'
+
 #JWT for authentication on api
 gem 'jwt'
-
+#classroom and school authentication 
 gem 'bcrypt', '~> 3.1.7'
+#autocomplete form for school choice for teachers and students
+gem 'rails4-autocomplete'
 
 gem 'cancan'
 #carrierwave gem to upload files
