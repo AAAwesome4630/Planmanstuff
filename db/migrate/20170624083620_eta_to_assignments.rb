@@ -5,5 +5,6 @@ class EtaToAssignments < ActiveRecord::Migration
     add_column :tests, :eta, :integer
     add_column :assignments, :description, :string
     add_column :tests, :description, :string
+    add_column :tests, :rec_days, :integer
   end
 end

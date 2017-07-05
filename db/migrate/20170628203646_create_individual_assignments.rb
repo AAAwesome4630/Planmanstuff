@@ -8,10 +8,12 @@ class CreateIndividualAssignments < ActiveRecord::Migration
       t.boolean :finished, default: false
       t.integer :student_id
       t.integer :rec_days
+      t.integer :classroom_id
       
       t.timestamps null: false
       
       
     end
+    add_index :individual_assignments, [:assignment_id, :student_id], unique: true
   end
 end

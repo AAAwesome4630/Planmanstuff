@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630052117) do
+ActiveRecord::Schema.define(version: 20170705054551) do
 
   create_table "admin_announcements", force: :cascade do |t|
     t.integer  "admin_id"
@@ -81,19 +81,25 @@ ActiveRecord::Schema.define(version: 20170630052117) do
     t.boolean  "finished",       default: false
     t.integer  "student_id"
     t.integer  "rec_days"
+    t.integer  "classroom_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "individual_assignments", ["assignment_id", "student_id"], name: "index_individual_assignments_on_assignment_id_and_student_id", unique: true
+
   create_table "individual_quizzes", force: :cascade do |t|
     t.integer  "quiz_id"
-    t.integer  "student_id"
     t.integer  "time_remaining"
     t.integer  "rec_days"
-    t.boolean  "finshed",        default: false
+    t.boolean  "finished",       default: false
+    t.integer  "student_id"
+    t.integer  "classroom_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
+
+  add_index "individual_quizzes", ["quiz_id", "student_id"], name: "index_individual_quizzes_on_quiz_id_and_student_id", unique: true
 
   create_table "individual_tests", force: :cascade do |t|
     t.integer  "test_id"
@@ -101,14 +107,19 @@ ActiveRecord::Schema.define(version: 20170630052117) do
     t.integer  "rec_days"
     t.boolean  "finished",       default: false
     t.integer  "student_id"
+    t.integer  "classroom_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "individual_tests", ["test_id", "student_id"], name: "index_individual_tests_on_test_id_and_student_id", unique: true
+
   create_table "quizzes", force: :cascade do |t|
-    t.integer  "classroom_id"
     t.date     "date"
     t.string   "topic"
+    t.integer  "classroom_id"
+    t.integer  "rec_days"
+    t.integer  "eta"
     t.string   "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -224,6 +235,7 @@ ActiveRecord::Schema.define(version: 20170630052117) do
     t.datetime "updated_at",   null: false
     t.integer  "eta"
     t.string   "description"
+    t.integer  "rec_days"
   end
 
   create_table "users", force: :cascade do |t|

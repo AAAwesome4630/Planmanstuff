@@ -6,6 +6,7 @@ class TFilesController < ApplicationController
     @t_file = TFile.new(tf_params)
     respond_to do |format|
       if @t_file.save
+        @classroom = Classroom.find_by_id(@t_file.classroom_id)
         format.html { redirect_to "", notice: 'TFile was successfully created.' }
       else
         format.html { redirect_to "", notice: 'error not created' }

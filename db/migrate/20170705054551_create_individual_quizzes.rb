@@ -3,12 +3,15 @@ class CreateIndividualQuizzes < ActiveRecord::Migration
     create_table :individual_quizzes do |t|
       
       t.integer :quiz_id
-      t.integer :student_id
       t.integer :time_remaining
       t.integer :rec_days
-      t.boolean :finshed, default: false
+      t.boolean :finished, default: false
+      t.integer :student_id
+      t.integer :classroom_id
+
 
       t.timestamps null: false
     end
+    add_index :individual_quizzes, [:quiz_id, :student_id], unique: true
   end
 end

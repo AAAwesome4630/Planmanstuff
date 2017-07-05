@@ -13,8 +13,18 @@
   </div>
   
   <div class="field">
-    <%= f.label :eta %><br />
+    <%= f.label :eta %> <em>(in minutes)</em><br />
     <%= f.number_field :eta, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :rec_days %><br />
+    <%= f.number_field :rec_days, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description, autofocus: true %>
   </div>
 
   <div class="actions">

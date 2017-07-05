@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :admin_announcements
   resources :individual_quizzes
   resources :quizzes
+  resources :quizzes
+  resources :admin_announcements
   resources :individual_tests
   resources :individual_assignments
   devise_for :administrators
