@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <title>PlanMan</title>
+     <link rel="shortcut icon" href="favicon.ico" />
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <body>
+        
+        <header class="header_top">
+            <%= render 'layouts/nav'%>
+            <section class="top">
+                <div class="content">
+                     <h1 class="hola">Welcome to Schooling in the Digital Age</h1>
+                     <h3 class="hola">PlanMan&#169 believes in the power of technology to simplify and improve lives.</h3>
+                     <h3 class="sup"></h3>
+                     <h3 class="sup">Insert another super cool fact here about our website that happens to bew quite long</h3>
+                    <div class="btns">
+                        <%= link_to("Teacher Sign Up", new_teacher_registration_path, class: 'btn-teacher') %>
+                        <p class="or"> OR</p>
+                        <%= link_to("Student Sign Up", new_teacher_registration_path, class: 'btn-student') %>
+                    </div>
+                    <h3 class="sup"></h3>
+                    <h5 class="sup"></h5>
+                    <div class="btns">
+                        <%= link_to("School Sign Up", new_teacher_registration_path, class: 'btn-teacher') %>
+                    </div>
+                   
+                </div>
+            </section>
+        </header>
+        <header class="header_two">
+            <section class="top">
+                <div class="header">
+                    <h1 class="hola">PlanMan strives to provide a easy-to-use application that allows schools, administrators, teacher, and students to</h1>
+                </div>
+            </section>
+            
+        </header>
+        <header class="header_three">
+            
+        </header>
+        <header class="header_four">
+            
+        </header>
+        <header class="header_five">
+            
+        </header>
+
+    </body>
+    <style>
+    
+
+body{
+      margin: 0;
+    padding: 0;
+}
+
+.top{
+    height: 100%;
+    width: 100%;
+    margin:0;
+    display: table;
+    top:0;
+}
+
+.top .content{
+    display: table-cell;
+    vertical-align: middle;
+    width:100%;
+    max-width:none;
+    
+}
+
+.hola{
+    text-align: center;
+    color: 	#dee4ed;
+    font-family: 'Lato', sans-serif;
+    padding: 10px;
+    max-width: 1000px;
+    margin: 0 auto 10px;
+}
+
+.sup{
+    text-align: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    padding: 10px;
+    max-width: 600px;
+    margin: 0 auto 10px;
+    visibility: hidden;
+}
+
+.or{
+    display: inline;
+    text-align: center;
+    font-family: 'Oswald';
+    color: white;
+    font-size: 130%;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-decoration:none;
+     margin: 0 auto 10px;
+}
+.header_top{
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/163130/keyboard-black-notebook-input-163130.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
+  /*background-image: url("https://images.pexels.com/photos/163130/keyboard-black-notebook-input-163130.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
+  */background-size: cover;
+  background-color: rgba(0,0,0,0.5);
+}
+.header_two{
+    height: 70vh;
+    width:100%;
+    background-color:rgba(249, 237, 209, 1.0);
+}
+.header_three{
+    height:90vh;
+    width:100%;
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+    background-size: cover;
+}
+.header_four{
+    height: 80vh;
+    width:100%;
+    background-color:rgba(249, 237, 209, 1.0);
+}
+.header_five{
+    height:90vh;
+    width:100%;
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/159658/bus-school-school-bus-yellow-159658.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+    background-size: cover;
+}
+.btns{
+    max-width:500px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.btns a{
+    display: inline;
+    text-align: center;
+    border-radius: 7px;
+    font-family: 'Oswald';
+    color: white;
+    font-size: 130%;
+    padding: 10px 20px;
+    border: solid white 3px;
+    text-transform: uppercase;
+    text-decoration:none;
+     margin: 0 auto 10px;
+}
+.btns a:hover{
+    color: #e8d035;
+    border: solid #e8d035 3px;
+    
+}
+
+    
+    </style>
+</html>
+

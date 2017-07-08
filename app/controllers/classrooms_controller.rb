@@ -15,15 +15,16 @@ before_filter :authenticate_teacher!, :except => [:show, :index]
     if(Classroom.find_by_id(params[:id]))
       @classroom_id = params[:id]
       @classroom = Classroom.find_by_id(params[:id])
-      @nOS = @classroom.numberOfStudents
+      @nOS = @classroom.students.length
       @teacher_id = @classroom.teacher_id
       @name = @classroom.name
       @subject = @classroom.subject
+      @teacher = Teacher.find_by_id(@teacher_id)
       
       if(teacher_signed_in?)
         if(current_teacher.id == @teacher_id)
           @tstatus = true
-          @link = "https://my-planner-app-cloned-20-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest.delete('.')
+          @link = "https://my-planner-app-cloned-20-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest.delete('.').delete('/')
         else
           @tstatus = false
         end

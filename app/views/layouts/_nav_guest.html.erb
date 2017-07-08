@@ -1,6 +1,6 @@
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top" >
+  <div class="container-fluid container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -14,35 +14,47 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#">Explore</a></li>
-      </ul>
+.
       
-      <ul class="nav navbar-nav navbar-right">
-          <form class="navbar-form navbar-right">
-            <%= form_tag("/find", method: "get") do %>
-        <div class="form-group">
-          <%= label_tag(:q, "") %>
-          <%= text_field_tag(:q) %>
-        </div>
-        <%= submit_tag("Search") %>
-        <%end%>
-      </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li><button type="button" class="btn btn-primary navbar-btn"><li class=" important"><%= link_to("Teacher Sign Up", new_teacher_registration_path, class:"important") %></li></button></li>
+      <li class="notmuch">YO</li>
+      <li><button type="button" class="btn btn-primary navbar-btn"><li class=" important"><%= link_to("Student Sign Up", new_student_registration_path, class:"important") %></li></button></li>
+      <li class="notmuch">YO</li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Navigation <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In As <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Help</a></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to("Teacher Sign Up", new_teacher_registration_path) %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to("Teacher Sign In", new_teacher_session_path) %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to("Student Sign Up", new_student_registration_path) %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to("Student Sign In", new_student_session_path) %></li>
+         <li><%= link_to("Student Sign In", new_student_session_path) %></li>
+         <li role="separator" class="divider"></li>
+        <li><%= link_to("Teacher Sign In", new_teacher_session_path) %></li>
+        <li role="separator" class="divider"></li>
+        <li><%= link_to("Administrator Sign In", new_administrator_session_path) %></li>
           </ul>
         </li>
+      <li><a href="#">Help</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<style>
+  @media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+  ul.nav li.dropdown:hover{
+    background-color: #d8d7d0;
+  }
+  ul.nav li.dropdown{
+    transition: background 0.2s ease-in-out;
+  }
+  ul.nav a.important{
+    text-decoration:none;
+    color:white;
+    transition:none;
+  }
+  .notmuch{
+    visibility:hidden;
+  }
+
+}
+</style>

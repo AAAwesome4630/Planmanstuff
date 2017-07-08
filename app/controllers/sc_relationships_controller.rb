@@ -23,7 +23,7 @@ class ScRelationshipsController < ApplicationController
           find_classroom_assignments(@classroom_id, current_student.id)
           find_classroom_tests(@classroom_id, current_student.id)
           find_classroom_quizzes(@classroom_id, current_student.id)
-          format.html { redirect_to "", notice: 'Relationship was successfully created.' }
+          format.html { redirect_to @classroom, notice: 'Relationship was successfully created.' }
         else
           format.html { redirect_to "", notice: 'error not created' }
         end
@@ -117,7 +117,7 @@ class ScRelationshipsController < ApplicationController
   
   def delete_individual_quizzes(classroomid, studentid)
     
-    Student.find_by_id(studentid).individual_quizs.all do |i_quiz|
+    Student.find_by_id(studentid).individual_quizzes.all do |i_quiz|
       if i_quiz.classroom_id = classroomid
         i_quiz.destroy
         i_quiz.save

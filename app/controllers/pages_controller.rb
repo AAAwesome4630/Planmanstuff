@@ -2,9 +2,7 @@ class PagesController < ApplicationController
   before_filter :authenticate_student!, :only => [:classlink]
 
   def index
-    term = params[:q]
-    @classrooms = Classroom.search(term)
-    #@classroom = Classroom.find_by_id(5)
+    render :layout => 'landingPage'
   end
 
   def home
@@ -133,7 +131,7 @@ class PagesController < ApplicationController
          if joined
            redirect_to @classroom, :notice => "You are already part of this classroom"
          else
-           if(@classroom.password_digest.delete('.') == params[:token])
+           if(@classroom.password_digest.delete('.').delete('/') == params[:token])
             @sc_relationship = ScRelationship.new(classroom_id: @classroom.id, student_id: current_student.id)
             respond_to do |format|
         if @sc_relationship.save

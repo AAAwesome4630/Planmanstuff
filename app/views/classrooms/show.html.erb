@@ -1,6 +1,6 @@
 <%if student_signed_in?%>
 <%if @status%>
-I am the one!!!!!!!!!!!<br></br>
+<%=@teacher.title%> <%=@teacher.last_name.capitalize%>'s <%= @classroom.name%> class  numberofStudents: <%=@nOS%><br></br>
 <% for @t in @t_filez do%>
 <%=@t.name%>  <%= link_to"Download It", @t.file.url%><br></br>
 <%end%>
@@ -21,7 +21,7 @@ I am the one!!!!!!!!!!!<br></br>
 </br><h2>Create an Announcement</h2>
 <%= render '/layouts/announcement_form'%>
 <%= link_to 'DELETE CLASSROOM', classroom_path, method: :delete, :data => {:confirm => 'Are you sure?'}%>
-<a href='edit'>Edit Classroom</a>
+<a href='/edit'>Edit Classroom</a>
 <%end%><br></br>
 
 <%end%>
