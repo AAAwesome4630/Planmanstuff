@@ -10,6 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">PlanMan</a>
+      
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,16 +22,14 @@
       
       <ul class="nav navbar-nav navbar-right">
           <form class="navbar-form navbar-right">
-        <%= form_tag("/find", method: "get") do %>
         <div class="form-group">
-          <%= label_tag(:q, "") %>
-          <%= text_field_tag(:q) %>
+          <input type="text" class="form-control" placeholder="Search">
         </div>
-        <%= submit_tag("Search") %>
-        <%end%>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
       </form>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_student.first_name.capitalize %> <%= current_student.last_name.capitalize%><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_student.first_name.capitalize %> <%= current_student.last_name.capitalize%><%=image_tag(current_student.avatar.versions[:icon])%><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
             <li role="separator" class="divider"></li>
@@ -45,3 +44,21 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<style>
+.navbar-default{
+  min-height:60px;
+  vertical-align:center;
+}
+.navbar-form{
+  padding-top:5px;
+}
+.navbar-nav li a {
+ line-height: 30px;
+}
+.navbar-brand{
+  line-height: 30px;
+}
+
+ 
+</style>

@@ -1,9 +1,9 @@
-<%= form_for @test, url: tests_path(@test) do |f| %>
+<%= form_for @quiz, url: quizzes_path(@quiz) do |f| %>
 
     <%= f.hidden_field :classroom_id, :value => @classroom_id %>
 
   <div class="field">
-    <%= f.label :date %><br />
+    <%= f.label : date %><br />
     <%= f.date_field :date, autofocus: true %>
   </div>
   

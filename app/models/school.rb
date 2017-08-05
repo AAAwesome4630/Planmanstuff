@@ -5,7 +5,7 @@ class School < ActiveRecord::Base
     end
     
     has_secure_password
-    has_many :administrators
+    has_many :administrators, dependent: :destroy
     has_many :s_srelationships, dependent: :destroy
     
     serialize :administrators, Array

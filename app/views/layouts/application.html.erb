@@ -9,6 +9,9 @@
 </head>
 <body>
   <%= render '/layouts/nav' %>
+  <%- flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+  <%- end -%>  
 <div class="container">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
@@ -16,3 +19,8 @@
 </div>
 </body>
 </html>
+<style>
+  #error_explanation h2{
+    font-size:14px;
+  }
+</style>

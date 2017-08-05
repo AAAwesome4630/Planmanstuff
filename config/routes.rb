@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :individual_quizzes
   resources :quizzes
-  resources :quizzes
   resources :admin_announcements
   resources :individual_tests
   resources :individual_assignments
@@ -15,7 +14,10 @@ Rails.application.routes.draw do
   resources :tests
   resources :announcements
   resources :t_files 
-  resources :schools
+  resources :schools do 
+    resources :administrators
+  end
+
 
   root 'pages#index'
 

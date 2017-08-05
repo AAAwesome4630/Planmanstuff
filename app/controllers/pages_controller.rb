@@ -2,7 +2,9 @@ class PagesController < ApplicationController
   before_filter :authenticate_student!, :only => [:classlink]
 
   def index
+    if(!teacher_signed_in? && !student_signed_in?)
     render :layout => 'landingPage'
+  end
   end
 
   def home
