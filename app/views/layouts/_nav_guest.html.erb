@@ -18,9 +18,7 @@
       
     <ul class="nav navbar-nav navbar-right">
       <li><button onclick="location.href='/teachers/sign_up'" type="button" class="btn btn-primary navbar-btn"><li class=" important"><%= link_to("Teacher Sign Up", new_teacher_registration_path, class:"important") %></li></button></li>
-      <li class="notmuch">YO</li>
       <li><button onclick="location.href='/students/sign_up'" type="button" class="btn btn-primary navbar-btn"><li class=" important"><%= link_to("Student Sign Up", new_student_registration_path, class:"important") %></li></button></li>
-      <li class="notmuch">YO</li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In As <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -36,6 +34,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
 <style>
   @media (min-width: 979px) {
   ul.nav li.dropdown:hover > ul.dropdown-menu {
@@ -54,21 +53,24 @@
     transition:none;
     height: 100%;
     line-height:30px;
-
   }
-  .notmuch{
-    visibility:hidden;
-  }
+.navbar-btn{
+  margin-right:10px;
+}
 .navbar-default{
   min-height:60px;
   vertical-align:center;
 }
-
 .navbar-default .navbar-nav > li > a,
 .navbar-brand {
   padding-top: 0;
   padding-bottom: 0;
   line-height: 60px;
 }
+
+
+
+
+
 
 </style>

@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
   
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, StudentUploader
   
   belongs_to  :school
   

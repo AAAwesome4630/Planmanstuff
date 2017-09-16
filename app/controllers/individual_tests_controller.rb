@@ -1,2 +1,0 @@
-class IndividualTestsController < ApplicationController
-end

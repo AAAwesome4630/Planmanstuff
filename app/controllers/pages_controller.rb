@@ -157,7 +157,7 @@ class PagesController < ApplicationController
 
   
   
-  def student_schedule(weekend)
+  def astudent_schedule(weekend)
     @json_string_start = "{\"assignments\":"
     @json_string_middle = ", \"tests\":"
     @json_string_end = "}"
@@ -197,6 +197,9 @@ class PagesController < ApplicationController
   def authenticate_student!
     if (teacher_signed_in?)
       sign_out current_teacher
+      super
+    elsif (adminstrator_signed_in?)
+      sign_out current_administrator
       super
     else
       super

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716053055) do
+ActiveRecord::Schema.define(version: 20170901054102) do
 
   create_table "admin_announcements", force: :cascade do |t|
     t.integer  "admin_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170716053055) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
+    t.string   "avatar"
   end
 
   add_index "administrators", ["email"], name: "index_administrators_on_email", unique: true
@@ -223,6 +224,7 @@ ActiveRecord::Schema.define(version: 20170716053055) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
+    t.string   "avatar"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true

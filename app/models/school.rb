@@ -1,4 +1,5 @@
 class School < ActiveRecord::Base
+  
     
     def self.search(search)
       where("LOWER(name) LIKE ?", "%#{search.downcase}%") 
