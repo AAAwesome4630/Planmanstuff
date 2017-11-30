@@ -2,12 +2,14 @@ class PagesController < ApplicationController
   before_filter :authenticate_student!, :only => [:classlink]
 
   def index
-    if(!teacher_signed_in? && !student_signed_in?)
-    render :layout => 'landingPage'
-  end
+    if(!teacher_signed_in? && !student_signed_in? && !administrator_signed_in?)
+      render :layout => 'landingPage'
+    end
   end
 
   def home
+    
+    @schoolSignUpToken = SchoolSignUpToken.new
     
     if(student_signed_in?)
       
@@ -33,6 +35,9 @@ class PagesController < ApplicationController
       @stests = Test.where("classroom_id IN (?)", sclassrooms)
       
       
+      @assignmentss = current_student.individual_assignments
+      @testss =  current_student.individual_tests
+      @quizzess =  current_student.individual_quizzes
       
       
       
@@ -46,6 +51,10 @@ class PagesController < ApplicationController
       @classrooms = @teacher.classroom
       
     end
+  
+  
+    
+      
 
   end
 
@@ -198,7 +207,7 @@ class PagesController < ApplicationController
     if (teacher_signed_in?)
       sign_out current_teacher
       super
-    elsif (adminstrator_signed_in?)
+    elsif (administrator_signed_in?)
       sign_out current_administrator
       super
     else

@@ -10,7 +10,7 @@
   width: 100%;
 }
 /*home.html.erb*/
-#articles .calendar {
+#scalendar .calendar {
   border-collapse: collapse;
   width: 100%;
 
@@ -40,7 +40,7 @@
   .today { background-color: #D7F2FF; }
 }
 
-#articles #month {
+#scalendar #month {
   margin: 0;
   padding-bottom: 10px;
   text-align: center;
@@ -52,7 +52,7 @@
   }
 }
 
-#articles ul {
+#scalendar ul {
   font-size: 11px;
   padding-left: 20px;
 }

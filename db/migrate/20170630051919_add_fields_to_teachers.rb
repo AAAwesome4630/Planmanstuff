@@ -6,5 +6,4 @@ class AddFieldsToTeachers < ActiveRecord::Migration
     add_column :teachers, :title, :string
     
   end
-  remove_index :schools, column: [:name, :mascot]
 end

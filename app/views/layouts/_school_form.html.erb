@@ -1,0 +1,90 @@
+<%= form_for @school, url: schools_path(@school) do |f| %>
+
+    <%= hidden_field_tag :sign_up_token_id, params[:id] %>
+    <div class="form-row">
+   <div class="form-group col-md-10 col-md-offset-1"> 
+  <div class="field">
+    <%= f.label "School Name" %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-10 col-md-offset-1"> 
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-2 col-md-offset-1"> 
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  <div class="form-group col-md-2"> 
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  <div class="form-group col-md-4"> 
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.select(:country, CS.countries.values, {:prompt => "Country Select"},{class: "form-control bfh-countries"} )%>
+  </div>
+  </div>
+  <div class="form-group col-md-2"> 
+  <div class="field">
+    <%= f.label :zipcode %><em>(if applicable)</em> <br />
+    <%= f.number_field :zipcode, autofocus: true, class: "form-control" %>
+  </div>  
+  </div>
+  </div>
+  
+  <div class="form-group col-md-7 col-md-offset-1">
+  <div class="field">
+    <%= f.label :mascot %><br />
+    <%= f.text_field :mascot, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  
+  <div class="form-group col-md-3">
+  <div class="field">
+    <%= f.label "NCES ID" %><em>(if applicable)</em><br />
+    <%= f.number_field :NCES_id, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  
+  
+  <div class="form-group col-md-10 col-md-offset-1">
+  <div class="field">
+    <%= f.label :website %><br />
+    <%= f.text_field :website, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  
+  <div class="form-group col-md-10 col-md-offset-1">
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  
+  <div class="form-group col-md-10 col-md-offset-1">
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autofocus: true, class: "form-control" %>
+  </div>
+  </div>
+  
+
+  <div class="actions">
+    <center>
+    <%= f.submit "Create School", class: "btn btn-primary" %>
+    </center>
+  </div>
+  
+<% end %>

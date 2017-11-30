@@ -5,6 +5,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  def current_ability
+    if administrator_signed_in?
+      @current_ability ||= Ability.new(current_administrator)
+    elsif student_signed_in?
+      @current_ability ||= Ability.new(current_student)
+    else
+       @current_ability ||= Ability.new(current_teacher)
+     end
+  end
 
 
     protected

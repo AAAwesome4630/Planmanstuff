@@ -4,16 +4,20 @@ Rails.application.routes.draw do
   resources :admin_announcements
   resources :individual_tests
   resources :individual_assignments
-  devise_for :administrators
+  devise_for :administrators, path_names: {
+    sign_up: 'schools/:id/administrator_sign_up/:token',
+    sign_in:'sign_in'
+  }
   devise_for :teachers
   devise_for :students
-  devise_for :users
   resources :classrooms 
   resources :sc_relationships
   resources :assignments
   resources :tests
   resources :announcements
   resources :t_files 
+  resources :schools
+  resources :school_sign_up_tokens
   resources :schools do 
     resources :administrators
   end
@@ -30,6 +34,11 @@ Rails.application.routes.draw do
   get 'newclassroom' =>'forms#newclassroom'
   
   get 'classroom/:id' =>'pages#classroom'
+  match '/school_sign_up',     to: 'contacts#new',             via: 'get'
+  
+  get ':id/school/:token/sign_up' => 'schools#sign_up'
+  get'/contacts'=> 'contacts#new'
+  resources "contacts", only: [:new, :create]
 
   get 'classrooms/:id/join/:token' => 'pages#classlink'
   #get 'classlink/:token' => 'pages#classlink'

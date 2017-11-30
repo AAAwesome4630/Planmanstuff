@@ -2,33 +2,45 @@
 
     <%= f.hidden_field :classroom_id, :value => @classroom_id %>
 
+<div class="form-row">
+    <div class="form-group col-md-12">
+      <div class="field">
+        <%= f.label "Topic/Name" %><br />
+        <%= f.text_field :topic, autofocus: true, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group col-md-4">
   <div class="field">
-    <%= f.label : date %><br />
-    <%= f.date_field :date, autofocus: true %>
+    <%= f.label :date %><br />
+    <%= f.date_field :date, autofocus: true, class: "form-control", min: Date.today %>
+  </div>
   </div>
   
- <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  
+ 
+  <div class="form-group col-md-4">
   <div class="field">
-    <%= f.label :eta %> <em>(in minutes)</em><br />
-    <%= f.number_field :eta, autofocus: true %>
+    <%= f.label "Estimated Time" %> <em>(in minutes)</em><br />
+    <%= f.number_field :eta, autofocus: true, class: "form-control" %>
   </div>
-  
+  </div>
+  <div class="form-group col-md-4">
   <div class="field">
-    <%= f.label :rec_days %><br />
-    <%= f.number_field :rec_days, autofocus: true %>
+    <%= f.label "Estimated Number of Days needed to Study" %><br />
+    <%= f.number_field :rec_days, autofocus: true, class: "form-control" %>
   </div>
-  
+  </div>
+  <div class="form-group col-md-12">
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description, autofocus: true %>
+    <%= f.text_area :description,cols: 20, rows: 5, autofocus: true, class: "form-control big-text", placeholder:"Description"%>
+  </div>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Quiz", class: "btn btn-primary" %>
   </div>
+  
   
 <% end %>

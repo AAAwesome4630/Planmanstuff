@@ -1,0 +1,35 @@
+<%= form_for @contact, url: contacts_path(@contact) do |f| %>
+
+
+
+  <div class="field">
+    <%= f.label "School Name" %><br />
+    <%= f.text_field :school_name, autofocus: true, class:"form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Your Name" %><br />
+    <%= f.text_field :person_name, autofocus: true, class:"form-control" %>
+  </div>
+  
+ <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email, autofocus: true, class:"form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Full Address" %><em>(Including city, state/province, zipcode, country)</em><br />
+    <%= f.text_field :address, autofocus: true, class:"form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Message" %><br />
+    <%= f.text_area :message, autofocus: true, cols:20, rows:5, class:"form-control" %>
+  </div>
+  
+<br />
+  <div class="actions">
+    <%= f.submit "Contact Us", class: "btn btn-primary" %>
+  </div>
+  
+<% end %>

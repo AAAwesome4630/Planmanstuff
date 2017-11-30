@@ -55,10 +55,10 @@ class TestsController < ApplicationController
     Classroom.find_by_id(classroom_id).tests.all.each do |dtest|
       @date_dif = dtest.date - Date.today
       if (@date_dif >= dtest.rec_days)
-        @i = IndividualTests.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: dtest.rec_days, student_id: studentid )
+        @i = IndividualTest.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: dtest.rec_days, student_id: studentid )
         @i.save
       elsif(@date_dif > 0)
-        @i = IndividualTests.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: @date_dif, student_id: studentid )
+        @i = IndividualTest.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: @date_dif, student_id: studentid )
         @i.save
       end
     end
@@ -66,7 +66,7 @@ class TestsController < ApplicationController
   
   def create_individual_tests(dtest)
     for studentid in Classroom.find_by_id(dtest.classroom_id).students do
-      @i = IndividualTests.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: dtest.rec_days, student_id: studentid )
+      @i = IndividualTest.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: dtest.rec_days, student_id: studentid )
       @i.save
     end
   end

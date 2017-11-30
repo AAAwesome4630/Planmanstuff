@@ -11,6 +11,8 @@
 <%end%>
 <%elsif teacher_signed_in?%>
 <%if @tstatus%>
+
+
 <%= @link%><br></br>
 <h2>Create a new Assignment</h2>
 <%=render '/layouts/assignment_form'%><br>
@@ -19,7 +21,9 @@
 </br><h2>Upload a File</h2>
 <%= render '/layouts/file_form'%><br>
 </br><h2>Create an Announcement</h2>
-<%= render '/layouts/announcement_form'%>
+<%= render '/layouts/announcement_form'%><br>
+</br><h2>Create an Announcement</h2>
+<%= render '/layouts/quiz_form'%>
 <%= link_to 'DELETE CLASSROOM', classroom_path, method: :delete, :data => {:confirm => 'Are you sure?'}%>
 <a href='/edit'>Edit Classroom</a>
 <%end%><br></br>

@@ -18,13 +18,13 @@
             <section class="top">
                 <div class="content">
                      <h1 class="hola">Welcome to Schooling in the Digital Age</h1>
-                     <h3 class="hola">PlanMan&#169 believes in the power of technology to simplify and improve lives.</h3>
+                     <h3 class="hola">PlanMan&#169 believes in the power of technology to simplify and improve the lives of students and teachers.</h3>
                     <div class="btns">
                         <%= link_to("Teacher Sign Up", new_teacher_registration_path, class: 'btn-teacher') %>
                         <%= link_to("Student Sign Up", new_student_registration_path, class: 'btn-student') %>
                     </div>
                     <div class="btns">
-                        <%= link_to("School Sign Up", new_teacher_registration_path, class: 'btn-teacher') %>
+                        <a href="/school_sign_up">School Sign Up</a>
                     </div>
                    
                 </div>
@@ -32,9 +32,8 @@
         </header>
         <header class="header_two">
             <section class="top">
-                <div class="header">
-                    <h1>How It Works..</h1>
-                </div>
+                    <h1 class="head">How It Works..</h1>
+                    <div></div>
             </section>
             
         </header>
@@ -45,6 +44,7 @@
             
         </header>
         <header class="header_five">
+            <h1 class="head"> About the Creator</h1>
             
         </header>
 
@@ -52,10 +52,6 @@
     <style>
     
 
-body{
-      margin: 0;
-    padding: 0;
-}
 
 .top{
     height: 100%;
@@ -78,7 +74,7 @@ body{
     color: 	#dee4ed;
     font-family: 'Lato', sans-serif;
     padding: 10px;
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 0 auto 10px;
 }
 

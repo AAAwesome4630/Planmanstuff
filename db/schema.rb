@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901054102) do
+ActiveRecord::Schema.define(version: 20171130031139) do
 
   create_table "admin_announcements", force: :cascade do |t|
     t.integer  "admin_id"
@@ -22,22 +22,23 @@ ActiveRecord::Schema.define(version: 20170901054102) do
   end
 
   create_table "administrators", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "school_id",              default: 0,  null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "school_id",              default: 0,     null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
+    t.boolean  "admin",                  default: false
     t.string   "avatar"
   end
 
@@ -72,9 +73,15 @@ ActiveRecord::Schema.define(version: 20170901054102) do
     t.datetime "updated_at",                            null: false
     t.text     "students",         default: "--- []\n"
     t.string   "password_digest"
+    t.string   "description"
   end
 
   add_index "classrooms", ["name", "teacher_id"], name: "index_classrooms_on_name_and_teacher_id"
+
+  create_table "contacts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "individual_assignments", force: :cascade do |t|
     t.integer  "assignment_id"
@@ -126,15 +133,6 @@ ActiveRecord::Schema.define(version: 20170901054102) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "s_srelationships", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "s_srelationships", ["school_id", "student_id"], name: "index_s_srelationships_on_school_id_and_student_id", unique: true
-
   create_table "sc_relationships", force: :cascade do |t|
     t.integer  "classroom_id"
     t.integer  "student_id"
@@ -143,6 +141,13 @@ ActiveRecord::Schema.define(version: 20170901054102) do
   end
 
   add_index "sc_relationships", ["classroom_id", "student_id"], name: "index_sc_relationships_on_classroom_id_and_student_id", unique: true
+
+  create_table "school_sign_up_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
@@ -154,14 +159,15 @@ ActiveRecord::Schema.define(version: 20170901054102) do
     t.string   "country"
     t.string   "mascot"
     t.string   "website"
-    t.integer  "numberOfTeachers", default: 0
+    t.integer  "numberOfTeachers",  default: 0
     t.integer  "NCES_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.text     "administrators",   default: "--- []\n"
-    t.text     "teachers",         default: "--- []\n"
-    t.text     "students",         default: "--- []\n"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.text     "administrators",    default: "--- []\n"
+    t.text     "teachers",          default: "--- []\n"
+    t.text     "students",          default: "--- []\n"
     t.string   "password_digest"
+    t.string   "advanced_password"
   end
 
   add_index "schools", ["name", "address"], name: "index_schools_on_name_and_address", unique: true
@@ -197,15 +203,6 @@ ActiveRecord::Schema.define(version: 20170901054102) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "t_srelationships", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "t_srelationships", ["school_id", "teacher_id"], name: "index_t_srelationships_on_school_id_and_teacher_id", unique: true
-
   create_table "teachers", force: :cascade do |t|
     t.string   "email",                  default: "",         null: false
     t.string   "encrypted_password",     default: "",         null: false
@@ -240,23 +237,5 @@ ActiveRecord::Schema.define(version: 20170901054102) do
     t.string   "description"
     t.integer  "rec_days"
   end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

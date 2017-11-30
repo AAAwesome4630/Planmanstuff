@@ -1,19 +1,17 @@
 <%= form_for @announcement, url: announcements_path(@announcements) do |f| %>
 
-    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
-
+  <%= f.hidden_field :classroom_id, :value => @classroom_id %>
   <div class="field">
     <%= f.label :header %><br />
-    <%= f.text_field :header%>
+    <%= f.text_field :header, class: "form-control", placeholder:"Header"  %>
   </div>
-  
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content, autofocus: true %>
+    <%= f.text_area :content,cols: 20, rows: 5, autofocus: true, class: "form-control big-text", placeholder:"Content of Announcement Goes Here"%>
   </div>
-
+  <br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Announcement", class: "btn btn-primary" %>
   </div>
   
 <% end %>

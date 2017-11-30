@@ -2,18 +2,30 @@
 <%= form_for @classroom do |f| %>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class:"form-control" %>
   </div>
   <div class="field">
     <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
+    <%= f.text_field :subject, class:"form-control" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description,cols: 20, rows: 5, autofocus: true, class: "form-control big-text", placeholder:"Description"%>  
   </div>
   
   <div class="field">
     <%= f.label :password %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password, class:"form-control" %>
   </div>
+  
+  
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confimation, class:"form-control" %>
+  </div>
+  <br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Classroom", class: "btn btn-primary" %>
   </div>
 <% end %>

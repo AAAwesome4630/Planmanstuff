@@ -65,7 +65,7 @@ class AssignmentsController < ApplicationController
   
   def create_individual_assignments(assignment)
     for studentid in Classroom.find_by_id(assignment.classroom_id).students do
-      @i = IndividualTests.new(test_id: assignment.id, time_remaining: assignment.eta, rec_days: assignment.rec_days, student_id: studentid )
+      @i = IndividualAssignment.new(assignment_id: assignment.id, time_remaining: assignment.eta, rec_days: assignment.rec_days, student_id: studentid )
       @i.save
     end
   end

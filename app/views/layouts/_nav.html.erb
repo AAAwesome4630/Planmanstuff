@@ -1,8 +1,11 @@
 <!-- two different nav bars -->
-<% if !teacher_signed_in? && !student_signed_in? %>
+<% if !teacher_signed_in? && !student_signed_in? && !administrator_signed_in?%>
   <%= render '/layouts/nav_guest' %>
-<% elsif !teacher_signed_in? %>
+<% elsif student_signed_in? %>
   <%= render '/layouts/nav_student' %>
-<% else %>
+<% elsif teacher_signed_in? %>
   <%= render '/layouts/nav_teacher' %>
+<%else%>
+  <%= render '/layouts/nav_administrator' %>
+
 <% end %>

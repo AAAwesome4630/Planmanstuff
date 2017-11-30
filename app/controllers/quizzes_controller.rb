@@ -66,7 +66,7 @@ class QuizzesController < ApplicationController
   
   def create_individual_quizzes(quiz)
     for studentid in Classroom.find_by_id(quiz.classroom_id).students do
-      @i = IndividualTests.new(test_id: quiz.id, time_remaining: quiz.eta, rec_days: quiz.rec_days, student_id: studentid )
+      @i = IndividualQuiz.new(test_id: quiz.id, time_remaining: quiz.eta, rec_days: quiz.rec_days, student_id: studentid )
       @i.save
     end
   end

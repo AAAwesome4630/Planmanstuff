@@ -24,7 +24,7 @@ before_filter :authenticate_teacher!, :except => [:show, :index]
       if(teacher_signed_in?)
         if(current_teacher.id == @teacher_id)
           @tstatus = true
-          @link = "https://my-planner-app-cloned-20-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest.delete('.').delete('/')
+          @link = "https://my-planner-app-cloned-23-aawesome4630.c9users.io/classrooms/"+params[:id].to_s+"/join/"+@classroom.password_digest.delete('.').delete('/')
         else
           @tstatus = false
         end
@@ -65,6 +65,8 @@ before_filter :authenticate_teacher!, :except => [:show, :index]
     @t_file = TFile.new
     
     @announcement = Announcement.new
+    
+    @quiz = Quiz.new
       
   end
 
@@ -77,6 +79,8 @@ before_filter :authenticate_teacher!, :except => [:show, :index]
     @classroom.teacher_id = current_teacher.id
     respond_to do |format|
       if @classroom.save
+        current_teacher.classrooms.push(@classroom.id)
+        current_teacher.save
         format.html { redirect_to @classroom, notice: 'classroom was successfully created.' }
       else
         format.html { redirect_to "", notice: 'error not created' }
@@ -128,5 +132,23 @@ before_filter :authenticate_teacher!, :except => [:show, :index]
 
   def classroom_params
     params.require(:classroom).permit(:name, :subject, :password)
+  end
+  
+  def getAssignments(date)
+    
+    return Classroom.find_by_id(params[:id]).find_by_due_date(date)
+    
+  end
+  
+  def getTests()
+    
+  end
+  
+  def getQuizzes()
+    
+  end
+  
+  def getAnnouncements()
+    
   end
 end

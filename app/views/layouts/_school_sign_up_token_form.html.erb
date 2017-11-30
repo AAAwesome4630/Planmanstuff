@@ -1,0 +1,7 @@
+<%= form_for @schoolSignUpToken, url: school_sign_up_tokens_path(@schoolSignUpToken) do |f| %>
+
+  <%= f.hidden_field :expires_at, :value => Time.now + 24.hours %>
+  <div class="actions">
+    <%= f.submit "Create School Sign Up Token"%>
+  </div>
+<% end %>

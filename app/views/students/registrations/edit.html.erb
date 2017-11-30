@@ -21,7 +21,7 @@
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name, autofocus: true %>
   </div>
-  
+  <%if false%>
    <%= f.label :school_name%><br />
   <%= f.text_field :school_name, list: "schools_autocomplete" %>
   <datalist id="schools_autocomplete">
@@ -30,6 +30,12 @@
     <% end %>
   </datalist>
   <br />
+  <%end%>
+  <div class="field">
+    <%= f.label :school_name %>
+    <em>(if applicable)</em><br />
+    <%= f.text_field :school_name, data: {autocomplete_source: schools_path}, placeholder: '(School Name)' %>
+  </div>
   
   <% if current_student.avatar.url.present? %>
     <%= image_tag(current_student.avatar.versions[:thumb]) %>

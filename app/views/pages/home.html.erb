@@ -1,13 +1,87 @@
+<% if can? :create, @SchoolSignUpToken %>
+    <%= render '/layouts/school_sign_up_token_form'%>
+    <% SchoolSignUpToken.all.each do |token|%>
+        https://my-planner-app-cloned-23-aawesome4630.c9users.io/<%= token.id%>/school/<%= token.token%>/sign_up<br />
+    <%end%>
+<% end %>
+
+
 <%if student_signed_in?%>
-<h3>Your Assignments</h3>
-<% for @a in @sassignments do%>
-<p><%=@a.name%>  <%=@a.due_date%></p>
-<%end%>
-<h3>Your Upcoming Tests</h3>
-<% for @t in @stests do%>
-<p><%=@t.topic%> <%=@t.date%></p>
-<%end%>
-<div id="articles">
+
+<div class="jumbotron">
+    
+  <h1><center>Welcome <%= current_student.first_name.capitalize%></center> </h1>
+  <p style="text-align:center">Today <%=Date.today.strftime("%B %d, %Y")%></p>
+  <p><center><a class="btn btn-primary btn-md" href="#scalendar" role="button">Go To Calendar</a></a></center></p>
+</div>
+<div class="row">
+    <div class="col-xs-4">
+        <div class="page-header">
+          <h1><center>Announcements</center></h1>
+        </div>
+        <% for @c_id in current_student.classrooms do%>
+        <% @c = Classroom.find_by_id(@c_id)%>
+        <% for @a in @c.announcements do%>
+        <% @t = Teacher.find_by_id(@c.teacher_id)%>
+        <%= link_to (@c), class: "classroom_link" do%>
+        <div class="panel panel-default">
+        <div class="panel-heading"><strong><%= @a.header%></strong> - <%=@t.title%><%=@t.last_name%></div>
+          <div class="panel-body">
+                <%=@a.content%> 
+          </div>
+          </div>
+          <%end%>
+          <%end%>
+        <%end%>
+    </div>
+    <div class="col-xs-4">
+        <div class="page-header">
+          <h1><center>Assignments</center></h1>
+        </div>
+        <% for @a in @assignmentss do%>
+        <% @aa = Assignment.find_by_id(@a.assignment_id)%>
+        <% @c = Classroom.find_by_id(@aa.classroom_id)%>
+        <%= link_to (@c), class: "classroom_link" do%>
+        <div class="panel panel-default">
+        <div class="panel-heading"><strong><%= @aa.name%></strong> - <%=@c.name%> due <%=@aa.due_date%> </div>
+          <div class="panel-body">
+                 <%= @aa.description%>
+          </div>
+        </div>
+        <%end%>
+        <%end%>
+    </div>
+    <div class="col-xs-4">
+        <div class="page-header">
+          <h1><center>Tests/Quizzes</center></h1>
+        </div>
+        <% for @t in @testss do%>
+        <% @tt = Test.find_by_id(@t.test_id)%>
+        <% @c = Classroom.find_by_id(@tt.classroom_id)%>
+        <%= link_to (@c), class: "classroom_link" do%>
+        <div class="panel panel-default">
+        <div class="panel-heading"><strong><%= @tt.topic%></strong> on <%=@tt.date%> - <%=@c.name%></div>
+          <div class="panel-body">
+                <%= @tt.description%>
+          </div>
+        </div>
+        <%end%>
+        <%end%>
+        <% for @q in @quizzess do%>
+        <% @qq = Quiz.find_by_id(@q.quiz_id)%>
+        <% @c = Classroom.find_by_id(@qq.classroom_id)%>
+        <%= link_to (@c), class: "classroom_link" do%>
+        <div class="panel panel-default">
+        <div class="panel-heading"><strong><%= @qq.topic%></strong> - <%=@c.name%></div>
+          <div class="panel-body">
+                due <%=@qq.date%> 
+          </div>
+        </div>
+        <%end%>
+        <%end%>
+    </div>
+</div>
+<div id="scalendar">
 <%= calendar do |date|%>
 <%= date.day%>
 <% for @a in @sassignments do%>
@@ -17,19 +91,53 @@
 <%end%>
 <% for @t in @stests do%>
     <% if @t.date == date%>
-        <li><%=@t.name%></li>
+        <li><%=@t.topic%></li>
     <%end%>
 <%end%>
 <%end%>
 </div>
+
+<%end%>
+
+
 <%if teacher_signed_in?%>
-
+<div class="jumbotron">
+    
+  <h1><center>Welcome <%= current_teacher.first_name.capitalize%></center> </h1>
+  <p style="text-align:center">Today <%=Date.today.strftime("%B %d, %Y")%></p>
+  <p><center><a class="btn btn-primary btn-md" href="#scalendar" role="button">Go To Calendar</a></a></center></p>
+</div>
+<div class="row">
+    
+    <div class="col-xs-4">
+        <div class="page-header">
+          <h1><center>Classrooms</center></h1>
+        </div>
+        <%= button_to "+ Add Classroom", newclassroom_path, :class => "btn btn-primary", :method => :get %>
+    </div>
+    
+</div>
 
 <%end%>
 
-<%end%>
 
 
 
 
 
+
+<style>
+    
+    .classroom_link{
+        text-decoration:none;
+        color:black;
+    }
+    .classroom_link:hover{
+        text-decoration:none;
+        color:black;
+    }
+    .classroom_link:hover + strong{
+        color:blue;
+    }
+
+</style>

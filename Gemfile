@@ -28,14 +28,22 @@ gem 'bcrypt', '~> 3.1.7'
 #autocomplete form for school choice for teachers and students
 gem 'rails4-autocomplete'
 
-gem 'cancan'
+gem 'cancancan'
 #carrierwave gem to upload files
 gem 'carrierwave'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'country_select', require: 'country_select_without_sort_alphabetical'
+
+gem 'city-state'
+
 gem 'mini_magick'
 gem 'fog'
+
+gem 'mail_form'
+
+gem 'simple_form'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
