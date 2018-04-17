@@ -1,7 +1,7 @@
 
 class Classroom < ActiveRecord::Base
   
-  has_secure_password
+    has_secure_password :validations => false
     belongs_to :teacher
     
     has_many :sc_relationships, dependent: :destroy 
@@ -13,7 +13,7 @@ class Classroom < ActiveRecord::Base
     has_many :t_files, dependent: :destroy
     
     def self.search(search)
-      where("name LIKE ?", "%#{search}%") 
+      where("LOWER(name) LIKE ?", "%#{search.downcase}%") 
     end
     
 end

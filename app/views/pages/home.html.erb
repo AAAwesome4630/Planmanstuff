@@ -82,11 +82,16 @@
     </div>
 </div>
 <div id="scalendar">
-<%= calendar do |date|%>
-<%= date.day%>
-<% for @a in @sassignments do%>
+  <h2 id="month">
+    <%= link_to "<", date: @date.prev_month %>
+    <%= @date.strftime("%B %Y") %>
+    <%= link_to ">", date: @date.next_month %>
+  </h2>
+  <%= calendar @date do |date| %>
+    <%= date.day %>
+    <% for @a in @sassignments do%>
     <% if @a.due_date == date%>
-        <li><%=@a.name%></li>
+        <li><%= @a.name %></li>
     <%end%>
 <%end%>
 <% for @t in @stests do%>
@@ -94,7 +99,7 @@
         <li><%=@t.topic%></li>
     <%end%>
 <%end%>
-<%end%>
+  <% end %>
 </div>
 
 <%end%>
@@ -102,9 +107,10 @@
 
 <%if teacher_signed_in?%>
 <div class="jumbotron">
-    
-  <h1><center>Welcome <%= current_teacher.first_name.capitalize%></center> </h1>
-  <p style="text-align:center">Today <%=Date.today.strftime("%B %d, %Y")%></p>
+  <div class="slie-down">
+  <h1 class="animationHeader"><center>Welcome <%= current_teacher.first_name.capitalize%></center> </h1>
+  </div>
+  <p style="text-align:center"><%=Date.today.strftime("%B %d, %Y")%></p>
   <p><center><a class="btn btn-primary btn-md" href="#scalendar" role="button">Go To Calendar</a></a></center></p>
 </div>
 <div class="row">
@@ -113,10 +119,46 @@
         <div class="page-header">
           <h1><center>Classrooms</center></h1>
         </div>
+        <%current_teacher.classrooms.each do |classroom_id|%>
+        <% @c = Classroom.find_by_id(classroom_id)%>
+        <%= link_to @c, class: "classroom_link" do%>
+        <div class="panel panel-default">
+          <div class="panel-body">
+                <%=@c.name%> 
+          </div>
+        </div>
+        <%end%>
+        <%end%>
         <%= button_to "+ Add Classroom", newclassroom_path, :class => "btn btn-primary", :method => :get %>
     </div>
     
+    <div class="col-xs-4">
+      <div class="page-header">
+        <h1><center>Today</center></h1>
+      </div>
+      
+    </div>
+    
+    <div class="col-xs-4">
+      <div class="page-header">
+        <h1><center>Announcments</center></h1>
+      </div>
+      
+    </div>
+    
 </div>
+
+<%= month_calendar events: @assignments do |date, assignments| %>
+  <%= date.day %>
+
+    <% assignments.each do |assignment| %>
+    <div>
+      <%= assignment.name %>
+    </div>
+  <% end %>
+  
+  
+<% end %>
 
 <%end%>
 
@@ -139,5 +181,35 @@
     .classroom_link:hover + strong{
         color:blue;
     }
+    
+    .calendar-heading{
+      text-align:center;
+      margin:10px;
+    }
+    .calendar-title{
+      font-size: 25px;
+    }
+    div.slide-down {
+  width:100%;
+  overflow:hidden;
+}
+div.slide-down h1 {
+  animation: 10s slide-down;
+  margin-top:0%;
+}
+
+@keyframes slide-down {
+  from {
+    margin-top: -100%;
+    height: 300%; 
+  }
+
+  to {
+    margin-top: 0%;
+    height: 100%;
+  }
+}
+    
+ 
 
 </style>

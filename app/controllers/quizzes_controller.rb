@@ -48,7 +48,7 @@ class QuizzesController < ApplicationController
   private 
   
   def quiz_params
-      params.require(:quiz).permit(:classroom_id, :date, :topic, :description, :eta)
+      params.require(:quiz).permit(:classroom_id, :date, :topic, :description, :eta, :rec_days)
   end
   
   def find_classroom_quizzes(classroom_id, studentid)

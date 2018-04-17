@@ -4,6 +4,9 @@ class CreateAssignments < ActiveRecord::Migration
       t.date :due_date
       t.string :name
       t.integer :classroom_id
+      t.integer :rec_days
+      t.integer :eta
+      t.string :description
 
       t.timestamps null: false
     end

@@ -13,6 +13,7 @@ class CreateSchools < ActiveRecord::Migration
       t.string :website
       t.integer :numberOfTeachers, default: 0
       t.integer :NCES_id
+      t.string :password_digest
 
       t.timestamps null: false
     end

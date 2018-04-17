@@ -1,5 +1,42 @@
+<h1>Search Results:</h1>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="page-header">
+      <h3><center>Classrooms:</center></h3>
+    </div>
+    <%if @classrooms.length>0%>
 <% @classrooms.each do |classroom| %>
-  <p>
-    <%= classroom.name %>
-  </p> 
+
+  <p><center>
+    <%= link_to classroom do %>
+      <%=classroom.name%>
+    <%end%>
+    </center>
+  </p>
+  
 <% end %>
+ <%else%>
+ <p><center>No Classrooms Found</center></p>
+ <%end%>
+  </div>
+
+
+<div class="col-xs-6">
+    <div class="page-header">
+<h3><center>Schools:</center></h3>
+</div>
+<%if @schools.length>0%>
+<% @schools.each do |school| %>
+
+  <p><center>
+    <%= link_to school do %>
+      <%=school.name%>
+    <%end%>
+    </center>
+  </p> 
+  
+<% end %>
+<%else%>
+<p><center>No Schools Found</center></p>
+<%end%>
+</div>

@@ -1,31 +1,122 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#link").hide();
+    $("#button").click(function(){
+        $("#link").toggle();
+    });
+});
+</script>
 <%if student_signed_in?%>
+
+
 <%if @status%>
-<%=@teacher.title%> <%=@teacher.last_name.capitalize%>'s <%= @classroom.name%> class  numberofStudents: <%=@nOS%><br></br>
+<div class="jumbotron">
+  <h1><center><%= @classroom.name%> <span class="subject"><%= @classroom.subject%></span></center></h1> <h3><%=@teacher.title%> <%=@teacher.last_name.capitalize%>'s  class  Number of Students: <%=@nOS%></h3>
+</div>
+
 <% for @t in @t_filez do%>
 <%=@t.name%>  <%= link_to"Download It", @t.file.url%><br></br>
 <%end%>
-<%= link_to 'LEAVE THIS CLASSROOM', sc_relationship_path(:sc_relationship_id => @scs_relationship.id), method: :delete%>
+<%= link_to 'Leave Classroom',sc_relationship_path(:sc_relationship_id => @scs_relationship.id), method: :delete, data: {:confirm => "Are you sure you want to leave this classroom"}%>
+<p><a class="btn btn-success btn-md" role="button">Leave This Classroom</a></p>
+
 <%elsif !@status%>
+
+
+<div class="jumbotron">
+  <h1><center><%= @classroom.name%> <span class="subject"><%= @classroom.subject%></span></center></h1>
+  <b>Teacher:</b> <%=@teacher.title%><%=@teacher.first_name.capitalize%> <%=@teacher.last_name.capitalize%><br />  
+  <b>Number of Students:</b> <%=@nOS%><br />
+  <% @s = School.find_by_id(@teacher.school_id)%>
+  <b>School:</b> <% if @s.present? %> <%=@s.name%> <%else%>N/A<%end%><br />
+  <b>Description:</b> <%= @classroom.description%>
+</div>
+
+
 <%= render '/layouts/relationship_form'%>
 
 <%end%>
 <%elsif teacher_signed_in?%>
+
+
 <%if @tstatus%>
 
+<div class="jumbotron">
+  <h1><center><%= @classroom.name%><%= link_to "Settings", edit_classroom_path, class: 'settings'%></center> </h1>
+  <p style="text-align:center"><%=Date.today.strftime("%B %d, %Y")%></p>
+  <p><center><a class="btn btn-success btn-md" href="#scalendar" role="button">Go To Calendar</a></center></p>
+  <p><center><a class="btn btn-primary btn-md" href="#newAssignment" role="button">+ Add Assignment</a> <a class="btn btn-primary btn-md" id="addTest" href="#newTest" data-turbolinks="false" role="button">+ Add Test</a> <a class="btn btn-primary btn-md" href="#newQuiz" data-turbolinks="false" role="button">+ Add Quiz</a> <a class="btn btn-primary btn-md" href="#newFile" data-turbolinks="false" role="button">+ Upload File</a> <a class="btn btn-primary btn-md" href="#newAnnouncement" data-turbolinks="false" role="button">+ Add Announcement</center></a></p>
+</div>
+<%if @class_pass%>
+<a class="btn btn-primary btn-md" id="button" role="button">Invite Link</a>
+<div id="link" class="panel-body"><%= @link%></div>
+<%end%>
+<div class="row">
+    <div class="col-xs-3">
+        <div class="page-header">
+          <h1><center>Students</center></h1>
+        </div>
+        <%for @s_id in @classroom.students do%>
+        <%@s = Student.find_by_id(@s_id)%>
+          <div class="panel-body">
+            <%= link_to sc_relationship_path(:sc_relationship_id =>ScRelationship.where("classroom_id = ? AND student_id = ?", @classroom.id, @s.id).first.id), data: {:confirm => 'Are you sure?'}, :method => :delete do%>
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            <%end%>
+            <%=@s.first_name%> <%=@s.last_name%>
+          </div>
+        <%end%>
+    </div>
+    <div class="col-xs-3">
+        <div class="page-header">
+          <h1><center>Assignments</center></h1>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="page-header">
+          <h1><center>Tests/Quizzes</center></h1>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="page-header">
+          <h1><center>Announcements</center></h1>
+        </div>
+    </div>
+</div>
 
-<%= @link%><br></br>
+<br></br>
+<div id="newAssignment">
 <h2>Create a new Assignment</h2>
 <%=render '/layouts/assignment_form'%><br>
+</div>
+<div id="newTest">
 </br><h2>Create a new Test</h2>
 <%=render '/layouts/test_form'%><br>
+</div>
+<div id="newQuiz">
+  </br><h2>Create a Quiz</h2>
+<%= render '/layouts/quiz_form'%>
+</div>
+<div id="newFile">
 </br><h2>Upload a File</h2>
 <%= render '/layouts/file_form'%><br>
+</div>
+<div id="newAnnouncement">
 </br><h2>Create an Announcement</h2>
 <%= render '/layouts/announcement_form'%><br>
-</br><h2>Create an Announcement</h2>
-<%= render '/layouts/quiz_form'%>
+</div>
+
 <%= link_to 'DELETE CLASSROOM', classroom_path, method: :delete, :data => {:confirm => 'Are you sure?'}%>
 <a href='/edit'>Edit Classroom</a>
 <%end%><br></br>
 
 <%end%>
+<style>
+  .settings{
+    font-size:15px;
+    text-decoration:underline;
+  }
+  b{
+    text-decoration: underline;
+  }
+</style>

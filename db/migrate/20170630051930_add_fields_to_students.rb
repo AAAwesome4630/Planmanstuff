@@ -3,6 +3,7 @@ class AddFieldsToStudents < ActiveRecord::Migration
     
     add_column :students, :first_name, :string
     add_column :students, :last_name, :string
+    add_column :students, :avatar, :string
     
   end
   add_index :schools, [:name, :address], unique: true

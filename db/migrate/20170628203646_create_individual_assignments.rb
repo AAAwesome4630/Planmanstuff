@@ -9,6 +9,7 @@ class CreateIndividualAssignments < ActiveRecord::Migration
       t.integer :student_id
       t.integer :rec_days
       t.integer :classroom_id
+      t.date :due_date
       
       t.timestamps null: false
       

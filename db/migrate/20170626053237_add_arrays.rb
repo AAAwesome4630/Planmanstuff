@@ -5,5 +5,7 @@ class AddArrays < ActiveRecord::Migration
     add_column :schools, :teachers, :text, default: []
     add_column :schools, :students, :text, default:[]
     add_column :students, :school_id, :integer, default: 0, null: false
+    add_column :classrooms, :students, :text, default: []
+    add_column :students, :classrooms, :text, default: []
   end
 end

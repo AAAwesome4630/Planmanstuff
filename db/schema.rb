@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130031139) do
+ActiveRecord::Schema.define(version: 20171007215139) do
 
   create_table "admin_announcements", force: :cascade do |t|
     t.integer  "admin_id"
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.date     "due_date"
     t.string   "name"
     t.integer  "classroom_id"
+    t.integer  "rec_days"
+    t.integer  "eta"
+    t.string   "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "eta"
-    t.integer  "rec_days"
-    t.string   "description"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -69,11 +69,11 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.string   "subject"
     t.integer  "numberOfStudents", default: 0,          null: false
     t.integer  "teacher_id"
+    t.string   "description"
+    t.string   "password_digest"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.text     "students",         default: "--- []\n"
-    t.string   "password_digest"
-    t.string   "description"
   end
 
   add_index "classrooms", ["name", "teacher_id"], name: "index_classrooms_on_name_and_teacher_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.integer  "student_id"
     t.integer  "rec_days"
     t.integer  "classroom_id"
+    t.date     "due_date"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.boolean  "finished",       default: false
     t.integer  "student_id"
     t.integer  "classroom_id"
+    t.date     "date"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -116,6 +118,7 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.boolean  "finished",       default: false
     t.integer  "student_id"
     t.integer  "classroom_id"
+    t.date     "date"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -159,15 +162,14 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.string   "country"
     t.string   "mascot"
     t.string   "website"
-    t.integer  "numberOfTeachers",  default: 0
+    t.integer  "numberOfTeachers", default: 0
     t.integer  "NCES_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.text     "administrators",    default: "--- []\n"
-    t.text     "teachers",          default: "--- []\n"
-    t.text     "students",          default: "--- []\n"
     t.string   "password_digest"
-    t.string   "advanced_password"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.text     "administrators",   default: "--- []\n"
+    t.text     "teachers",         default: "--- []\n"
+    t.text     "students",         default: "--- []\n"
   end
 
   add_index "schools", ["name", "address"], name: "index_schools_on_name_and_address", unique: true
@@ -185,8 +187,8 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.integer  "school_id",              default: 0,          null: false
     t.text     "classrooms",             default: "--- []\n"
-    t.integer  "school_id",              default: 0
     t.string   "first_name"
     t.string   "last_name"
     t.string   "avatar"
@@ -216,7 +218,7 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.integer  "school_id",              default: 0
+    t.integer  "school_id",              default: 0,          null: false
     t.text     "classrooms",             default: "--- []\n"
     t.string   "first_name"
     t.string   "last_name"
@@ -231,11 +233,11 @@ ActiveRecord::Schema.define(version: 20171130031139) do
     t.date     "date"
     t.string   "topic"
     t.integer  "classroom_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "rec_days"
     t.integer  "eta"
     t.string   "description"
-    t.integer  "rec_days"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

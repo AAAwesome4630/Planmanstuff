@@ -1,11 +1,24 @@
 
 <%= form_for @sc_relationship do |f| %>
 
-    <%= f.hidden_field :classroom_id, :value => @classroom_id %>
-Password<br></br>
-<%= text_field_tag(:password) %><br></br>
+<%= f.hidden_field :classroom_id, :value => @classroom_id %>
+<% if @class_pass%>
+<div class="row">
+  <div class="col-xs-3">
+    Password:
+  <%= password_field_tag 'password', '', class: "form-control"%>
+  </div>
+  
+</div>
+<style>
+  .join{
+    margin-top:10px;
+  }
+</style>
+
+<%end%>
   <div class="actions">
-    <%= f.submit "Join this Classroom" %>
+    <%= f.submit "Join this Classroom", class: "btn btn-primary join"  %>
   </div>
   
 <% end %>

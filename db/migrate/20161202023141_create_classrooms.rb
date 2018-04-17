@@ -6,6 +6,8 @@ class CreateClassrooms < ActiveRecord::Migration
       t.string :subject
       t.integer :numberOfStudents, default: 0, null: false
       t.integer :teacher_id
+      t.string :description
+      t.string :password_digest
       
 
       t.timestamps null: false

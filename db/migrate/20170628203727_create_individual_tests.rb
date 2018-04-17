@@ -9,7 +9,7 @@ class CreateIndividualTests < ActiveRecord::Migration
       t.boolean :finished, default: false
       t.integer :student_id
       t.integer :classroom_id
-
+      t.date :date
       t.timestamps null: false
       
     end

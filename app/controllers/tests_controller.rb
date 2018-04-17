@@ -48,7 +48,7 @@ class TestsController < ApplicationController
   private 
   
   def test_params
-      params.require(:test).permit(:classroom_id, :date, :topic, :description, :eta)
+      params.require(:test).permit(:classroom_id, :date, :topic, :description, :eta, :rec_days)
   end
   
   def find_classroom_tests(classroom_id, studentid)

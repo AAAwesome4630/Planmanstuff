@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     @schoolSignUpToken = SchoolSignUpToken.new
     
     if(student_signed_in?)
-      
+      @date = params[:date] ? Date.parse(params[:date]) : Date.today
       require 'json'
       
       #@schedule = JSON.parse student_schedule("normal")
@@ -49,7 +49,7 @@ class PagesController < ApplicationController
     if (teacher_signed_in?)
       @teacher = current_teacher
       @classrooms = @teacher.classroom
-      
+      @assignments = Assignment.all
     end
   
   
@@ -60,8 +60,9 @@ class PagesController < ApplicationController
 
   def find
     
-    term = params[:q]
+    term = params[:search]
     @classrooms = Classroom.search(term)
+    @schools = School.search(term)
     
   end
 
@@ -143,16 +144,21 @@ class PagesController < ApplicationController
            redirect_to @classroom, :notice => "You are already part of this classroom"
          else
            if(@classroom.password_digest.delete('.').delete('/') == params[:token])
-            @sc_relationship = ScRelationship.new(classroom_id: @classroom.id, student_id: current_student.id)
+             @classroom_id = @classroom.id
+             @s_id = current_student.id
+            @sc_relationship = ScRelationship.new(classroom_id: @classroom_id, student_id: @s_id)
             respond_to do |format|
         if @sc_relationship.save
           @classroom.students.push(current_student.id)
-          current_student.classrooms.push(@classroom.id)
+          current_student.classrooms.push(@classroom.id.to_i)
           @classroom.save
           current_student.save
+          find_classroom_assignments(@classroom_id, @s_id)
+          find_classroom_tests(@classroom_id, @s_id)
+          find_classroom_quizzes(@classroom_id, @s_id)
           format.html { redirect_to @classroom, notice: 'Relationship was successfully created.' }
         else
-          format.html { redirect_to @classroom, notice: 'error not created' }
+          format.html { redirect_to "", notice: 'error not created' }
         end
       end
            else
@@ -214,5 +220,45 @@ class PagesController < ApplicationController
       super
     end
   end
+  
+  def find_classroom_tests(classroomid, studentid)
+    Classroom.find_by_id(classroomid).tests.all.each do |dtest|
+      @date_dif = dtest.date.mjd - Date.today.mjd+1
+      if (@date_dif >= dtest.rec_days)
+        @i = IndividualTests.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: dtest.rec_days, student_id: studentid, classroom_id: classroomid )
+        @i.save
+      elsif(@date_dif >= 0)
+        @i = IndividualTests.new(test_id: dtest.id, time_remaining: dtest.eta, rec_days: @date_dif, student_id: studentid, classroom_id: classroomid )
+        @i.save
+      end
+    end
+  end
+  
+  def find_classroom_assignments(classroomid, studentid)
+    for @a in Classroom.find_by_id(classroomid).assignments.all.each do
+      @date_dif = @a.due_date.mjd - Date.today.mjd+1
+      if (@date_dif >= @a.rec_days)
+        @i = IndividualAssignment.new(assignment_id: @a.id, time_remaining: @a.eta, rec_days: @a.rec_days, student_id: studentid, classroom_id: classroomid )
+        @i.save
+      elsif(@date_dif >= 0)
+        @i = IndividualAssignment.new(assignment_id:@a.id, time_remaining: @a.eta, rec_days: @date_dif, student_id: studentid, classroom_id: classroomid )
+        @i.save
+      end
+    end
+  end
+  
+  def find_classroom_quizzes(classroomid, studentid)
+    Classroom.find_by_id(classroomid).quizzes.all.each do |quiz|
+      @date_dif = quiz.date.mjd - Date.today.mjd+1
+      if (@date_dif >= quiz.rec_days)
+        @i = IndividualQuiz.new(quiz_id: quiz.id, time_remaining: quiz.eta, rec_days: quiz.rec_days, student_id: studentid, classroom_id: classroomid )
+        @i.save
+      elsif(@date_dif >= 0)
+        @i = IndividualQuiz.new(quiz_id: quiz.id, time_remaining: quiz.eta, rec_days: @date_dif, student_id: studentid,  classroom_id: classroomid )
+        @i.save
+      end
+    end
+  end
+  
 
 end
