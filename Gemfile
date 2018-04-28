@@ -34,6 +34,8 @@ gem 'carrierwave'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'mdbootstrap-rails'
+
 gem 'country_select', require: 'country_select_without_sort_alphabetical'
 
 gem 'city-state'

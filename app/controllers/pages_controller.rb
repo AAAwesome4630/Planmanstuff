@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def index
     if(!teacher_signed_in? && !student_signed_in? && !administrator_signed_in?)
-      render :layout => 'landingPage'
+      render :layout => 'landingPage3'
     end
   end
 

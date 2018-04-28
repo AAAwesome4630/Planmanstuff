@@ -10,6 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require tether
+//= require bootstrap
+//= require mdb
 //= require jquery
 //= require autocomplete-rails
 //= require bootstrap-sprockets
